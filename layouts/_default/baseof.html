@@ -9,5 +9,9 @@
         </main>
 
         {{- partial "footer.html" . -}}
+
+        {{ $built := resources.Get "js/main.js" | js.Build (dict "params" (dict "API_URL" "https://sueldos-tech-chile-2022.onrender.com/v2/answers")) | resources.Minify | fingerprint }}
+
+        <script type="text/javascript" src="{{ $built.RelPermalink }}" integrity="{{ $built.Data.Integrity }}" defer></script>
     </body>
 </html>
